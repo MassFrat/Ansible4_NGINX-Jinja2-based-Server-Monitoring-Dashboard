@@ -1,0 +1,6 @@
+---
+- name: Install and configure NGINX for Website Hosting
+  hosts: all
+  become: yes
+  roles:  
+    - nginx
