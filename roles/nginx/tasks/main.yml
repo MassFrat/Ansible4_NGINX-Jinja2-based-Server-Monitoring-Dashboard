@@ -1,0 +1,79 @@
+---
+#TASK1:
+- name: Update apt cache
+  apt:
+    update_cache: yes
+ 
+- name: Install NGINX 
+  apt:
+    name: nginx
+    state: present
+
+- name: Enable NGINX 
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+#TASK2 
+#refer to system_monitor.sh bash script
+
+#Task3
+- name: Copy Nginx configuration
+  copy:
+    src: /etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: '0644'
+
+- name: Copy Bash Script
+  copy:
+    src: get_service_monitor.sh
+    dest: /tmp/get_service_monitor.sh
+    mode: '0755'
+
+- name: Execute The Shell Script
+  command: /bin/bash /tmp/get_service_monitor.sh
+  register: script_output
+
+#- name: Copy HTML file
+#  copy:
+#    src:
+#    dest:
+#    mode: ''
+
+- name: Copy CSS file
+  copy:
+    src: files/style.css
+    dest: /var/www/html/style.css
+    mode: '0644'
+
+#Task4
+- name: Install Certbot
+  apt:
+    name: certbot
+    state: present
+
+- name: Install NGINX Certbot Plugin
+  apt:
+    name: python3-certbot-nginx
+    state: present
+
+#- name: Creates Directory for SSL Certificate
+#  file:
+#    path: /etc/nginx/ssl
+#    state: directory
+#    mode: '0755'
+
+#- name: Generate Self-Signed SSL Certificate
+#  shell: >
+#     openssl req -x509 -nodes -days 365 -newkey rsa:2048
+#     -keyout /etc/nginx/ssl/nginx.key
+#     -out /etc/nginx/ssl/nginx.crt
+#     -subj "/C=US/ST=State/L=City/O=Organization/CN=192.168.56.12"
+#  args:
+#  creates: /etc/nginx/ssl/nginx.key
+
+#- name: Deploy NGINX Configuration with HTTPS
+#  template:
+#    src: nginx.conf.j2
+#    dest: /etc/nginx/sites-available/default

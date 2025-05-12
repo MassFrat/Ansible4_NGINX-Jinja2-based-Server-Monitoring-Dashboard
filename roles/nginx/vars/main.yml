@@ -1,0 +1,5 @@
+---
+# vars file for roles/nginx
+
+package_name: "nginx"
+service_name: "nginx"
