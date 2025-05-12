@@ -16,7 +16,7 @@
     enabled: yes
 
 #TASK2 
-#refer to system_monitor.sh bash script
+#refer to service_monitor.sh bash script
 
 #Task3
 - name: Copy Nginx configuration
