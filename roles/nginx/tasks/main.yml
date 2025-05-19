@@ -3,21 +3,17 @@
 - name: Update apt cache
   apt:
     update_cache: yes 
- 
-- name: Install NGINX 
+
+- name: Install NGINX
   apt:
     name: nginx
     state: present
 
-- name: Enable NGINX 
+- name: Enable NGINX
   service:
     name: nginx
     state: started
     enabled: yes 
-
-- name: Debug NGINX status result
-  debug:
-    var: result
 
 #TASK2 
 #refer to system_metrics.sh bash script
@@ -27,7 +23,7 @@
   copy:
     src: get_system_metrics.sh
     dest: /usr/bin/get_system_metrics.sh
-    mode: '0755'
+    mode: '0755' 
 
 - name: Execute Bash Script
   command: /bin/bash /usr/bin/get_system_metrics.sh
@@ -39,13 +35,6 @@
     memory_usage: "{{ script_output.stdout_lines[1].split(': ')[1] }}"
     disk_usage: "{{ script_output.stdout_lines[2].split(': ')[1] }}"
     uptime: "{{ script_output.stdout_lines[3].split(': ')[1] }}"
-
-- name: Show parsed variables
-  debug:
-    msg:
-      - "CPU: {{ cpu_usagee }}"
-        # - "Age: {{ age }}"
-        # - "City: {{ city }}"      
 
 - name: Deploy HTML J2 File
   template:
@@ -59,34 +48,19 @@
     dest: /var/www/html/style.css
     mode: '0644'
 
-#Task4
-- name: Install Certbot
-  apt:
-    name: certbot
-    state: present
-
-- name: Install NGINX Certbot Plugin
-  apt:
-    name: python3-certbot-nginx
-    state: present
-
-- name: Creates Directory for SSL Certificate
-  file:
-    path: /etc/nginx/ssl
-    state: directory
-    mode: '0755'
-
-- name: Generate Self-Signed SSL Certificate
-  shell: >
-     openssl req -x509 -nodes -days 365 -newkey rsa:2048
-     -keyout /etc/nginx/ssl/nginx.key
-     -out /etc/nginx/ssl/nginx.crt
-     -subj "/C=US/ST=State/L=City/O=Organization/CN=192.168.254.127"
-  args:
-    creates: /etc/nginx/ssl/nginx.key
-
 - name: Deploy NGINX Configuration with HTTPS
   template:
     src: nginx.conf.j2
-    dest: /etc/nginx/sites-available/default
-    #notify: restart nginx
+    dest: /etc/nginx/nginx.conf
+    mode: '0644'
+  notify:
+    - restart nginx
+    
+
+
+
+
+
+
+
+
