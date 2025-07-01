@@ -1,5 +1,10 @@
 # Server Monitoring Dashboard with NGINX, Ansible, and Web Technologies
+<br/>
 This guide explains how to build a comprehensive server monitoring dashboard using NGINX as the web server, Ansible for automation and configuration management, with HTML and CSS creating the visual interface.
+
+<br/>
+<br/>
+
 
 ## Project Overview
 The server monitoring dashboard provides real-time visibility into server performance, resource utilization, and system health. NGINX serves the dashboard interface while Ansible handles the automated deployment, configuration, and data collection processes. The dashboard displays metrics through a responsive HTML interface styled with CSS for optimal user experience.
@@ -37,4 +42,4 @@ NGINX configuration optimization ensures fast dashboard loading and efficient da
 ## Maintenance and Updates:
 Ongoing maintenance involves regular updates to monitoring scripts, dashboard enhancements, and security patches. Ansible playbooks automate these maintenance tasks, ensuring consistent updates across all monitored servers. Version control integration allows tracking changes to configurations and dashboard components over time.
 
-## This comprehensive monitoring solution provides administrators with essential visibility into server performance while maintaining automated deployment and management through modern DevOps practices.
+### This comprehensive monitoring solution provides administrators with essential visibility into server performance while maintaining automated deployment and management through modern DevOps practices.
