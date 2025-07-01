@@ -1,5 +1,4 @@
 ---
-#TASK1:
 - name: Update apt cache
   apt:
     update_cache: yes 
@@ -15,10 +14,8 @@
     state: started
     enabled: yes 
 
-#TASK2 
 #refer to system_metrics.sh bash script
 
-#Task3
 - name: Copy Bash Script
   copy:
     src: get_system_metrics.sh
